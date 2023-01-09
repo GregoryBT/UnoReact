@@ -1,0 +1,57 @@
+.LoginPage {
+    background-image: url('../../assets/uno-backgrounds.jpg');
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    // Centrer le contenu
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .content{
+        width: 30%;
+        display: grid;
+        grid-template-rows: repeat(4, auto);
+        
+        background-color: #00000090;
+        padding: 20px;
+        border: 3px solid white;
+        border-radius: 20px;
+        
+        .Title{
+            color: #FFFFFF;
+        }
+        .Textbox{
+            height: 30px;
+            margin: 5px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            border: 0px;
+        }
+        .Button{
+            background-color: #e12e06;
+            color: #FFFFFF;
+            min-width: 100px;
+            width: 20%;
+            margin: 5px;
+            border-radius: 5px;
+            border: 0px;
+            height: 30px;
+        }
+        .Button:hover{
+            background-color: #b82606;
+            cursor: pointer;
+        }
+        .Text{
+            color: #FFFFFF;
+        }
+        .Text:hover{
+            color: #e12e06;
+            cursor: pointer;
+        }
+    }
+  }

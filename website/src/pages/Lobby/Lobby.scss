@@ -1,0 +1,61 @@
+.LobbyPage{
+    // background: linear-gradient(107.56deg, #FE5C03 0%, #D91A21 100%);
+    background-image: url('../../assets/uno-backgrounds.jpg');
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    // Centrer le contenu
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .content{
+        background-color: #00000090;
+        padding: 20px;
+        border: 3px solid white;
+        border-radius: 20px;
+        min-width: 30%;
+
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .Players{
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+
+            .Player{
+                width: 30%;
+                height: 200px;
+                width: 150px;
+                margin: 0px 10px;
+                background-color: #ffffff;
+                border-radius: 10px;
+                // Centrer le contenu
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+        button{
+            background-color: #e12e06;
+            color: #FFFFFF;
+            min-width: 100px;
+            width: 60%;
+            margin: 15px;
+            border-radius: 5px;
+            border: 0px;
+            height: 30px;
+        }
+        button:hover{
+            background-color: #b82606;
+            cursor: pointer;
+        }
+    }
+}
