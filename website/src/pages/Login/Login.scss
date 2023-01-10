@@ -38,40 +38,61 @@
             font-size: 40px;
         }
 
-        .Textbox {
-            // Couleur
-            background-color: #FFFFFF;
-            color: black;
-            // Border
-            border-radius: 10px;
-            border: 0px;
-            // Taille
-            height: 40px;
-            width: 80%;
-            margin: 5px;
-            padding: 2px 10px;
+        .form {
+            width: 100%;
+            // Centrer le contenu
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-            // Autre
-            &::placeholder {
-                color: #303030;
+            .Textbox {
+                z-index: 2;
+                // Couleur
+                background-color: #FFFFFF;
+                color: black;
+                // Border
+                border-radius: 10px;
+                border: 0px;
+                // Taille
+                height: 40px;
+                width: 80%;
+                margin: 5px;
+                padding: 2px 10px;
+
+                // Autre
+                &::placeholder {
+                    color: #303030;
+                }
+            }
+
+            .messageErreur {
+                z-index: 1;
+                margin: -20px 0px 0px 0px;
+                border-radius: 0px 0px 10px 10px;
+                width: 80%;
+                padding: 20px 10px 10px 10px;
+                background-color: #b1b1b1;
+                color: red;
+            }
+
+            .Button {
+                background-color: #e12e06;
+                color: #FFFFFF;
+                min-width: 100px;
+                padding: 0px 20px;
+                margin: 30px 0px 15px 0px;
+                border-radius: 5px;
+                border: 0px;
+                height: 30px;
+            }
+
+            .Button:hover {
+                background-color: #b82606;
+                cursor: pointer;
             }
         }
 
-        .Button {
-            background-color: #e12e06;
-            color: #FFFFFF;
-            min-width: 100px;
-            padding: 0px 20px;
-            margin: 30px 0px 15px 0px;
-            border-radius: 5px;
-            border: 0px;
-            height: 30px;
-        }
-
-        .Button:hover {
-            background-color: #b82606;
-            cursor: pointer;
-        }
 
         .Text {
             text-decoration: none;

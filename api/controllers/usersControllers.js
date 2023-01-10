@@ -53,7 +53,7 @@ exports.login = (req, res) => {
             })
             if (user) {
                 // Generate an access token
-                const accessToken = jwt.sign({ email: user.email, role: user.role }, accessTokenSecret)
+                const accessToken = jwt.sign({ email: user.username }, accessTokenSecret)
 
                 res.json({
                     accessToken,
