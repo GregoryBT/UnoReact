@@ -8,6 +8,8 @@ mongoose.connect(mongoDB, {
     useUnifiedTopology: true,
 })
 
+mongoose.set('strictQuery', false);
+
 // Get the default connection
 var db = mongoose.connection
 

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const PORT = process.env.PORT || 6666
-const UserRoutes = require('./routes/user')
+const UsersRoutes = require('./routes/users')
 
 // database connection
 require('./config/database')
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // routes
-app.use('/user', UserRoutes)
+app.use('/users', UsersRoutes)
 
 // server running status
 app.listen(PORT, () => {
