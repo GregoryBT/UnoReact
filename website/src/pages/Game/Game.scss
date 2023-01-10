@@ -1,37 +1,91 @@
+@keyframes monter {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    100% {
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+}
+
+@keyframes pioche {
+    0% {
+        -webkit-transform: translateX(0) rotate(0);
+        transform: translateX(0) rotate(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(30px) rotate(10deg);
+        transform: translateX(30px) rotate(10deg);
+    }
+}
+
 .GamePage {
-    background: linear-gradient(107.56deg, #FE5C03 0%, #D91A21 100%);
+    // Taille
     width: 100%;
     height: 100vh;
-
+    // Couleur 
+    background: linear-gradient(107.56deg, #FE5C03 0%, #D91A21 100%);
     // Centrer le contenu
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    @keyframes monter {
-        0% {
-            -webkit-transform: translateY(0);
-            transform: translateY(0);
-        }
+    .player1 {
+        display: grid;
+        padding: 50px 50px 0px 50px;
+        max-width: 90%;
+        overflow-x: auto;
+        grid-template-columns: repeat(999999, auto);
+        position: absolute;
+        bottom: 0px;
 
-        100% {
-            -webkit-transform: translateY(-30px);
-            transform: translateY(-30px);
+        &::-webkit-scrollbar {
+            opacity: 0;
         }
     }
 
-    @keyframes pioche {
-        0% {
-            -webkit-transform: translateX(0) rotate(0);
-            transform: translateX(0) rotate(0);
-        }
+    .player2 {
+        position: absolute;
+        background-color: #FFFFFF;
+        top: 10px;
+        width: 30%;
+        height: 150px;
+        border-radius: 10px;
 
-        100% {
-            -webkit-transform: translateX(30px) rotate(10deg);
-            transform: translateX(30px) rotate(10deg);
-        }
+        display: grid;
+        grid-template-columns: repeat(2, 30% 70%);
     }
+
+    .player3 {
+        position: absolute;
+        background-color: #FFFFFF;
+        top: 100px;
+        right: 15px;
+        width: 31%;
+        height: 150px;
+        transform: rotate(15deg);
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 30% 70%);
+    }
+
+    .player4 {
+        position: absolute;
+        background-color: #FFFFFF;
+        top: 100px;
+        left: 15px;
+        width: 31%;
+        height: 150px;
+        transform: rotate(-15deg);
+        border-radius: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 30% 70%);
+    }
+
 
     .card {
         margin: 0px -25px;
@@ -56,18 +110,7 @@
 
     }
 
-    .cardennemi {
-        margin: 0px -35px;
-        height: 150px;
-        width: 100px;
-        border-radius: 15px;
-        border: 8px solid #FFFFFF;
-        // Centrer le contenu
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+
 
     .discardCard {
         position: absolute;
@@ -80,6 +123,17 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.25));
+
+        // &::after {
+        //     content: "";
+        //     border: 5px solid white;
+        //     width: 80%;
+        //     height: 80%;
+        //     border-radius: 100%;
+        //     position: absolute;
+        //     transform: rotate(45deg);
+        // }
     }
 
     .drawCard {
@@ -109,62 +163,78 @@
         animation-fill-mode: forwards;
     }
 
-    .cards-bottom {
-        display: grid;
-        padding: 50px 50px 0px 50px;
-        max-width: 70%;
-        overflow-x: scroll;
-        grid-template-columns: repeat(999999, auto);
-        position: absolute;
-        bottom: 0px;
-    }
+    .cards-bottom {}
 
-    .player2 {
-        position: absolute;
-        background-color: #FFFFFF;
-        top: 10px;
-        width: 30%;
-        height: 150px;
-        border-radius: 10px;
 
-        display: grid;
-        grid-template-columns: repeat(2, 30% 70%);
-    }
-
-    .player3 {
-        position: absolute;
-        background-color: #FFFFFF;
-        top: 100px;
-        right: 15px;
-        width: 31%;
-        height: 150px;
-        transform: rotate(20deg);
-        border-radius: 10px;
-        display: grid;
-        grid-template-columns: repeat(2, 30% 70%);
-    }
-
-    .player4 {
-        position: absolute;
-        background-color: #FFFFFF;
-        top: 100px;
-        left: 15px;
-        width: 31%;
-        height: 150px;
-        transform: rotate(-20deg);
-        border-radius: 10px;
-        display: grid;
-        grid-template-columns: repeat(2, 30% 70%);
-    }
 
 
     .player {
-        .avatar {}
+        .avatar {
+            margin: 0px;
+            height: 70%;
+            // Centrer le contenu
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-        .username {}
+            img {
+                object-fit: cover;
+                border-radius: 100px;
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        .username {
+            margin: 0px;
+            height: 30%;
+            // Centrer le contenu
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
     }
 
     .playercard {
-        background-color: #000000;
+        display: grid;
+        grid-template-columns: repeat(999999999, auto);
+        background-color: #363636;
+        padding-left: 10px;
+        // Centrer le contenu
+        align-items: center;
+        flex-direction: column;
+        border-radius: 10px;
+
+        .cardennemi {
+            height: 120px;
+            width: 80px;
+            border-radius: 15px;
+            margin-right: -70px;
+            border: 3px solid #FFFFFF;
+            // Centrer le contenu
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .BTN_Uno {
+        font-size: large;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 200px;
+        height: 50px;
+
+        background-color: #ec2127;
+        border: 0px solid;
+        border-radius: 20px;
+    }
+
+    .BTN_Uno:hover {
+        color: #FFFFFF;
+        background-color: #680306;
     }
 }

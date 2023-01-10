@@ -23,7 +23,9 @@ function Test() {
     const [filter, setFilter] = useState(null)
 
     function onChangeData(data) {
-        setTableau([...tableau, data])
+        setTableau((currentValue) => {
+            [...currentValue, data]
+        })
     }
 
     function onFilterData(data) {
