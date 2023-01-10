@@ -21,8 +21,20 @@
         }
     }
 
+    @keyframes pioche {
+        0% {
+            -webkit-transform: translateX(0) rotate(0);
+            transform: translateX(0) rotate(0);
+        }
+
+        100% {
+            -webkit-transform: translateX(30px) rotate(10deg);
+            transform: translateX(30px) rotate(10deg);
+        }
+    }
+
     .card {
-        margin: -25px;
+        margin: 0px -25px;
         height: 150px;
         width: 100px;
         border-radius: 15px;
@@ -44,8 +56,64 @@
 
     }
 
+    .cardennemi {
+        margin: 0px -35px;
+        height: 150px;
+        width: 100px;
+        border-radius: 15px;
+        border: 8px solid #FFFFFF;
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .discardCard {
+        position: absolute;
+        height: 150px;
+        width: 100px;
+        border-radius: 15px;
+        border: 8px solid #FFFFFF;
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .drawCard {
+        position: absolute;
+        margin-left: -600px;
+        height: 150px;
+        width: 100px;
+        border-radius: 15px;
+        border: 8px solid #FFFFFF;
+        background-color: #101010;
+        color: white;
+        font-size: 30px;
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
+    .firstdrawCard:hover {
+        cursor: pointer;
+        /* règles d'animation */
+        animation-name: pioche;
+        animation-duration: 0.2s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
     .cards-bottom {
         display: grid;
+        padding: 50px 50px 0px 50px;
+        max-width: 70%;
+        overflow-x: scroll;
         grid-template-columns: repeat(999999, auto);
         position: absolute;
         bottom: 0px;
@@ -53,9 +121,11 @@
 
     .cards-top {
         display: grid;
+        padding: 0px 50px 50px 50px;
+        overflow-x: hidden;
+        max-width: 70%;
         grid-template-columns: repeat(999999, auto);
         position: absolute;
         top: 0px;
-        transform: rotate(180deg)
     }
 }

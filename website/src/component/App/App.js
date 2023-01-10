@@ -6,6 +6,7 @@ import Home from '../../pages/Home/Home';
 import './App.css';
 import Lobby from '../../pages/Lobby/Lobby';
 import Game from '../../pages/Game/Game';
+import Test from '../../pages/Test/Test';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );
