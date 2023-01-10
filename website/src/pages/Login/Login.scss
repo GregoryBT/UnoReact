@@ -1,57 +1,87 @@
 .LoginPage {
-    background-image: url('../../assets/uno-backgrounds.jpg');
+    // Taille
     width: 100%;
     height: 100vh;
+    // Fond d'écran
+    background-image: url('../../assets/uno-backgrounds.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-
     // Centrer le contenu
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    .content{
-        width: 30%;
-        display: grid;
-        grid-template-rows: repeat(4, auto);
-        
+    .content {
+        // Couleur
         background-color: #00000090;
-        padding: 20px;
+        // Taille
+        width: 30%;
+        padding: 10px;
+        //Border
         border: 3px solid white;
         border-radius: 20px;
-        
-        .Title{
+        //Position
+        display: grid;
+        grid-template-rows: repeat(4, auto);
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .Title {
+            // Couleur
             color: #FFFFFF;
+            // Taille
+            font-size: 40px;
         }
-        .Textbox{
-            height: 30px;
-            margin: 5px;
-            padding: 2px 10px;
+
+        .Textbox {
+            // Couleur
+            background-color: #FFFFFF;
+            color: black;
+            // Border
             border-radius: 10px;
             border: 0px;
+            // Taille
+            height: 40px;
+            width: 80%;
+            margin: 5px;
+            padding: 2px 10px;
+
+            // Autre
+            &::placeholder {
+                color: #303030;
+            }
         }
-        .Button{
+
+        .Button {
             background-color: #e12e06;
             color: #FFFFFF;
             min-width: 100px;
-            width: 20%;
-            margin: 5px;
+            padding: 0px 20px;
+            margin: 30px 0px 15px 0px;
             border-radius: 5px;
             border: 0px;
             height: 30px;
         }
-        .Button:hover{
+
+        .Button:hover {
             background-color: #b82606;
             cursor: pointer;
         }
-        .Text{
+
+        .Text {
+            text-decoration: none;
             color: #FFFFFF;
         }
-        .Text:hover{
+
+        .Text:hover {
             color: #b82606;
             cursor: pointer;
         }
     }
-  }
+
+}

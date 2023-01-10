@@ -7,6 +7,7 @@ import './App.css';
 import Lobby from '../../pages/Lobby/Lobby';
 import Game from '../../pages/Game/Game';
 import Test from '../../pages/Test/Test';
+import Register from '../../pages/Login/Register';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/game" element={<Game />} />
