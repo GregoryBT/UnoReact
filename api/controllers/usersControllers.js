@@ -21,7 +21,13 @@ exports.post = (req, res) => {
     // On récupere les données passer en JSON
     const UsernameItem = req.body?.username || null
     const PasswordItem = req.body?.password || null
-
+    Users.find((err, docs) => {
+        // Filter user from the users array by username and password
+        const user = docs.find((u) => {
+            return u.username === UsernameItem
+        })
+        console.log(user)
+    })
     // On créé l'objet qui stock les données du nouvel utlilisateur
     const newUsers = new Users({
         username: UsernameItem,
@@ -55,11 +61,11 @@ exports.login = (req, res) => {
                 // Generate an access token
                 const accessToken = jwt.sign({ email: user.username }, accessTokenSecret)
 
-                res.json({
+                res.status(200).json({
                     accessToken,
                 })
             } else {
-                res.send('username or password incorrect')
+                res.status(200).json("Not match")
             }
         } else {
             res.status(500).send(err)

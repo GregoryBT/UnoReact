@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { sha256 } from 'js-sha256';
 import './Login.scss'
+import ApiAddUser from '../../api/User/Post'
 
 function Register() {
     const { register, formState: { errors }, handleSubmit, watch } = useForm({ criteriaMode: 'all', mode: 'onChange', })
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        const _response = await ApiAddUser(data.username, sha256(data.password))
+
+
     }
 
     return (

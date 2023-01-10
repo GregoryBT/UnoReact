@@ -1,13 +1,13 @@
-async function Login(Username, Password) {
+async function ApiLogin(Username, Password) {
     // Déclaration du token a retournée
-    var token;
+
     // Création d'un objet de connexion avec les informations rentrés
     const InformationConnexion = {
         username: Username,
         password: Password,
     }
     // Verification de la de la personne via l'api avec l'objet créé précedement en paramètre
-    await fetch(`http://localhost:7777/users/login`, {
+    return await fetch(`http://localhost:7777/users/login`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -16,9 +16,7 @@ async function Login(Username, Password) {
         body: JSON.stringify(InformationConnexion),
     })
         .then(function (response) {
-            return console.log(response)
+            return response.json()
         })
-    return token
-
 }
-export default Login
+export default ApiLogin

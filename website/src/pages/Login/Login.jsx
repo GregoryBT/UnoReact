@@ -1,13 +1,23 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { sha256 } from 'js-sha256';
+import { useNavigate } from 'react-router-dom';
+import ApiLogin from '../../api/User/Login';
 import './Login.scss'
 
 function Login() {
     const { register, formState: { errors }, handleSubmit, watch } = useForm({ criteriaMode: 'all', mode: 'onChange', })
+    const navigate = useNavigate();
 
-    const onSubmit = (data) => {
-
+    const onSubmit = async (data) => {
+        const token = await ApiLogin(data.username, sha256(data.password))
+        if (token === "Not match") {
+            alert("Identifiant ou mot de passe incorrect.")
+        }
+        else {
+            localStorage.setItem("Token", token.accessToken)
+            navigate('/home');
+        }
     }
 
     return (
