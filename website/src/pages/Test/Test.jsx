@@ -3,20 +3,42 @@ import { useState } from "react"
 import Test2 from "./Test2"
 
 function Test() {
-    const [tableau, setTableau] = useState([])
+    const [tableau, setTableau] = useState([
+        {
+            nom: "Toccanier",
+            prenom: "Gregory",
+            datenaissance: "2001"
+        },
+        {
+            nom: "Toccanier",
+            prenom: "Gregory",
+            datenaissance: "2002"
+        },
+        {
+            nom: "Toccanier",
+            prenom: "Gregory",
+            datenaissance: "2003"
+        },
+    ])
+    const [filter, setFilter] = useState(null)
 
-    function RemplirTableau(data) {
+    function onChangeData(data) {
         setTableau([...tableau, data])
     }
+
+    function onFilterData(data) {
+        setFilter(data)
+    }
+
     return (
-        <div>
+        <>
             <Test2
-                onChangeData={(e) => RemplirTableau(e)}
-            ></Test2>
-            {tableau.map((data) => (
-                <p>{data}</p>
-            ))}
-        </div>
+                data={tableau}
+                filter={filter}
+                onChangeData={(e) => onChangeData(e)}
+                onFilterData={(e) => onFilterData(e)}
+            />
+        </>
 
     )
 }

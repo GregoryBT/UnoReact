@@ -61,8 +61,23 @@ function Game() {
             <div className='cards-bottom'>
                 {ShowCards()}
             </div>
-            <div className='cards-top'>
-                {ShowEnnemiCards()}
+            <div className='player2'>
+                <div className='player'>
+                    <img className='avatar'></img>
+                    <p className='username'>Gregory</p>
+                </div>
+                <div className='playercard'></div>
+                {/* {ShowEnnemiCards()} */}
+            </div>
+            <div className='player3'>
+                <div className='player'></div>
+                <div className='playercard'></div>
+                {/* {ShowEnnemiCards()} */}
+            </div>
+            <div className='player4'>
+                <div className='player'></div>
+                <div className='playercard'></div>
+                {/* {ShowEnnemiCards()} */}
             </div>
             <div className='Discard'>
                 {ShowDiscardCards()}
