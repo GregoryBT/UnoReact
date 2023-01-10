@@ -1,0 +1,12 @@
+/node_modules
+npm-debug.log
+
+# Local environment variables
+.env
+
+# Logs
+logs/*
+
+# Production
+build/
+dist/
