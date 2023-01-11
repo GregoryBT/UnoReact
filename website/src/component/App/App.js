@@ -11,6 +11,7 @@ import Test from '../../pages/Test/Test';
 import Register from '../../pages/Login/Register';
 import { Navigate } from 'react-router-dom';
 import ApiVerifLogin from '../../api/User/VerifLogin';
+import Loader from '../Loader/Loader';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/game" element={<Game />} />
         <Route path="/test" element={<Test />} />
+        <Route path="/loader" element={<Loader />} />
       </Routes>
     </BrowserRouter>
   );

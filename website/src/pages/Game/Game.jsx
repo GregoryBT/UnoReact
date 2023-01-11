@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
+import ApiVerifLogin from "../../api/User/VerifLogin"
 import './Game.scss'
 import DefaultProfil from '../../assets/profil.jpg'
 import Card from '../../component/Card/Card'
+import Loader from "../../component/Loader/Loader";
 
 function Game() {
     //#region ************************************************ Déclaration des variables
@@ -98,6 +101,7 @@ function Game() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
         console.log(user)
         if (user === "Forbidden") {
+            alert("Il faut d'abord se connecter")
             navigate('/login');
         }
         else {
@@ -159,70 +163,78 @@ function Game() {
 
     //#region ************************************************ Return
     return (
-        <div className="GamePage">
-            {/*  Joueur 1 */}
-            <div className='player1'>
-                {players[0].cards.map((card) => (
-                    <Card
-                        key={card.id}
-                        className='card'
-                        style={{ backgroundColor: card.hexa }}
-                        side={"Front"}
-                        card={card}
-                    />
-                ))}
-            </div>
-            {/*  Joueur 4 */}
-            <div className='player2'>
-                <div className='player'>
-                    <div className='avatar'>
-                        <img src={DefaultProfil}></img>
-                    </div>
-                    <p className='username'>{players[1].username}</p>
-                </div>
-                <div className='playercard'>
-                    {ShowEnnemiCards(players[1].cards)}
-                </div>
-            </div>
-            {/*  Joueur 4 */}
-            <div className='player3'>
-                <div className='player'>
-                    <div className='avatar'>
-                        <img src={DefaultProfil}></img>
-                    </div>
-                    <p className='username'>{players[2].username}</p>
-                </div>
-                <div className='playercard'>
-                    {ShowEnnemiCards(players[2].cards)}
-                </div>
-            </div>
-            {/*  Joueur 4 */}
-            <div className='player4'>
-                <div className='player'>
-                    <div className='avatar'>
-                        <img src={DefaultProfil}></img>
-                    </div>
-                    <p className='username'>{players[3].username}</p>
-                </div>
-                <div className='playercard'>
-                    {ShowEnnemiCards(players[3].cards)}
-                </div>
-            </div>
-            {/*  Pile */}
-            <div className='Discard'>
-                {ShowDiscardCards()}
-            </div>
-            {/*  Pioche */}
-            <div className='drawCard'>
-                UNO
-            </div>
-            <div className='firstdrawCard drawCard'>
-                UNO
-            </div>
-            {/*  Bouton UNO */}
-            {ShowBTNUno()}
+        <React.Fragment>
+            {!isLoaded ? (
+                <Loader />
+            ) : (
 
-        </div>
+                <div className="GamePage">
+                    {/*  Joueur 1 */}
+                    <div className='player1'>
+                        {players[0].cards.map((card) => (
+                            <Card
+                                key={card.id}
+                                className='card'
+                                style={{ backgroundColor: card.hexa }}
+                                side={"Front"}
+                                card={card}
+                            />
+                        ))}
+                    </div>
+                    {/*  Joueur 4 */}
+                    <div className='player2'>
+                        <div className='player'>
+                            <div className='avatar'>
+                                <img src={DefaultProfil}></img>
+                            </div>
+                            <p className='username'>{players[1].username}</p>
+                        </div>
+                        <div className='playercard'>
+                            {ShowEnnemiCards(players[1].cards)}
+                        </div>
+                    </div>
+                    {/*  Joueur 4 */}
+                    <div className='player3'>
+                        <div className='player'>
+                            <div className='avatar'>
+                                <img src={DefaultProfil}></img>
+                            </div>
+                            <p className='username'>{players[2].username}</p>
+                        </div>
+                        <div className='playercard'>
+                            {ShowEnnemiCards(players[2].cards)}
+                        </div>
+                    </div>
+                    {/*  Joueur 4 */}
+                    <div className='player4'>
+                        <div className='player'>
+                            <div className='avatar'>
+                                <img src={DefaultProfil}></img>
+                            </div>
+                            <p className='username'>{players[3].username}</p>
+                        </div>
+                        <div className='playercard'>
+                            {ShowEnnemiCards(players[3].cards)}
+                        </div>
+                    </div>
+                    {/*  Pile */}
+                    <div className='Discard'>
+                        {ShowDiscardCards()}
+                    </div>
+                    {/*  Pioche */}
+                    <div className='drawCard'>
+                        UNO
+                    </div>
+                    <div className='firstdrawCard drawCard'>
+                        UNO
+                    </div>
+                    {/*  Bouton UNO */}
+                    {ShowBTNUno()}
+
+                </div>
+            )
+            }
+        </React.Fragment>
     )
     //#endregion
 }

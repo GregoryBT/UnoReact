@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from "react"
+import { useNavigate } from 'react-router-dom';
+import ApiVerifLogin from "../../api/User/VerifLogin"
+import Loader from "../../component/Loader/Loader";
 import './Lobby.scss'
 
 function Lobby() {
@@ -22,6 +25,7 @@ function Lobby() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
         console.log(user)
         if (user === "Forbidden") {
+            alert("Il faut d'abord se connecter")
             navigate('/login');
         }
         else {
@@ -45,15 +49,23 @@ function Lobby() {
 
     //#region ************************************************ Return
     return (
-        <div className="LobbyPage">
-            <div className="content">
-                <h1>Joueurs Connectés</h1>
-                <div className='Players'>
-                    {AfficherPlayers(allPlayers)}
+        <React.Fragment>
+            {!isLoaded ? (
+                <Loader />
+            ) : (
+
+                <div className="LobbyPage">
+                    <div className="content">
+                        <h1>Joueurs Connectés</h1>
+                        <div className='Players'>
+                            {AfficherPlayers(allPlayers)}
+                        </div>
+                        <button>Commencer la partie</button>
+                    </div>
                 </div>
-                <button>Commencer la partie</button>
-            </div>
-        </div>
+            )
+            }
+        </React.Fragment>
     )
     //#endregion
 }

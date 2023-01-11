@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import ApiVerifLogin from "../../api/User/VerifLogin"
+import Loader from "../../component/Loader/Loader";
 import './Home.scss'
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
         console.log(user)
         if (user === "Forbidden") {
+            alert("Il faut d'abord se connecter")
             navigate('/login');
         }
         else {
@@ -45,7 +47,7 @@ function Home() {
     return (
         <React.Fragment>
             {!isLoaded ? (
-                <div className="Loader"></div>
+                <Loader></Loader>
             ) : (
 
                 <div className="HomePage">
