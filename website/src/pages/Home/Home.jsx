@@ -53,7 +53,6 @@ function Home() {
 
     //#region ************************************************ Evenement
     const onClickCreateGameHandler = () => {
-
         socket.emit('restart game');
         navigate('/lobby');
     }

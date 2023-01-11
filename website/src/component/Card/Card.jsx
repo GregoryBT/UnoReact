@@ -1,10 +1,23 @@
 function Card(props) {
     if (props.side === "Front") {
-        return (
-            <div key={props.key} className={props.className} style={props.style} onClick={() => props.onClick(props.card)}>
-                <p>{props.card.value}</p>
-            </div >
-        )
+        console.log(props.card.color)
+        if (props.card.color === "black") {
+            console.log(props.style)
+            props.style.color = "#FFFFFF"
+            console.log(props.style)
+            return (
+                <div key={props.key} className={props.className} style={props.style} onClick={() => props.onClick(props.card)}>
+                    <p>{props.card.value}</p>
+                </div >
+            )
+        }
+        else {
+            return (
+                <div key={props.key} className={props.className} style={props.style} onClick={() => props.onClick(props.card)}>
+                    <p>{props.card.value}</p>
+                </div >
+            )
+        }
     }
     else {
         return (

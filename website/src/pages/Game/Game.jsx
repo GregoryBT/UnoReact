@@ -164,11 +164,12 @@ function Game() {
     }
 
     function ShowDiscardCards() {
+        console.log(discardCards);
         return (discardCards.map((card) => (
             <Card
                 key={card.id}
                 className='discardCard'
-                style={{ backgroundColor: card.hexa, transform: 'rotate(' + Math.floor(Math.random() * 360) + 'deg)', marginLeft: (-25 - Math.floor(Math.random() * (45))) + 'px', marginTop: (-55 - Math.floor(Math.random() * (40))) + 'px' }}
+                style={{ backgroundColor: card.hexa, transform: 'rotate(' + card.rotate + 'deg)', marginLeft: (-25 - card.mLeft) + 'px', marginTop: (-55 - card.mTop) + 'px' }}
                 side={"Front"}
                 card={card}
             />
