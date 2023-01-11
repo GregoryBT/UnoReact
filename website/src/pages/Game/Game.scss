@@ -225,7 +225,7 @@
         position: absolute;
         bottom: 20px;
         right: 20px;
-        width: 200px;
+        width: 10%;
         height: 50px;
 
         background-color: #ec2127;
@@ -234,6 +234,7 @@
     }
 
     .BTN_Uno:hover {
+        cursor: pointer;
         color: #FFFFFF;
         background-color: #680306;
     }

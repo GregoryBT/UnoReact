@@ -172,78 +172,47 @@ function Game() {
         )
     }
 
-    // Affiche le joueurs numéro 1
-    function ShowPlayer1() {
-        console.log(players[0])
-        if (!!players[0]) {
-            return (
-                <div className='player1'>
-                    {players[0].cards.map((card) => (
-                        <Card
-                            key={card.id}
-                            className='card'
-                            style={{ backgroundColor: card.hexa }}
-                            side={"Front"}
-                            card={card}
-                        />
-                    ))}
-                </div>
-            )
-        }
+    // Affiche notre joueur
+    function ShowPlayer() {
+        let player = players.filter(p => p.name === user.username);
+        console.log(player)
+        console.log(players)
+        console.log(user.username)
+        return (
+            <div className='player1'>
+                {player[0].cards.map((card) => (
+                    <Card
+                        key={card.id}
+                        className='card'
+                        style={{ backgroundColor: card.hexa }}
+                        side={"Front"}
+                        card={card}
+                    />
+                ))}
+            </div>
+        )
     }
-    // Affiche le joueurs numéro 2
-    function ShowPlayer2() {
-        if (!!players[1]) {
+    // Affiche le joueurs des autres
+    function ShowOtherPlayer() {
+        let otherplayer = players.filter(p => p.name !== user.username);
+        return otherplayer.map((_player, i) => {
+            console.log(_player)
             return (
-                <div className='player2'>
+                <div className={'player' + (i + 2)}>
                     <div className='player'>
                         <div className='avatar'>
                             <img src={DefaultProfil}></img>
                         </div>
-                        <p className='username'>{players[1].username}</p>
+                        <p className='username'>{_player.name}</p>
                     </div>
                     <div className='playercard'>
-                        {ShowEnnemiCards(players[1].cards)}
+                        {ShowEnnemiCards(_player.cards)}
                     </div>
                 </div>
             )
-        }
-    }
-    // Affiche le joueurs numéro 3
-    function ShowPlayer3() {
-        if (!!players[2]) {
-            return (
-                <div className='player3'>
-                    <div className='player'>
-                        <div className='avatar'>
-                            <img src={DefaultProfil}></img>
-                        </div>
-                        <p className='username'>{players[2].username}</p>
-                    </div>
-                    <div className='playercard'>
-                        {ShowEnnemiCards(players[2].cards)}
-                    </div>
-                </div>
-            )
-        }
-    }
-    // Affiche le joueurs numéro 4
-    function ShowPlayer4() {
-        if (!!players[3]) {
-            return (
-                <div className='player4'>
-                    <div className='player'>
-                        <div className='avatar'>
-                            <img src={DefaultProfil}></img>
-                        </div>
-                        <p className='username'>{players[3].username}</p>
-                    </div>
-                    <div className='playercard'>
-                        {ShowEnnemiCards(players[3].cards)}
-                    </div>
-                </div>
-            )
-        }
+        })
+
+
     }
     //#endregion
 
@@ -255,14 +224,8 @@ function Game() {
             ) : (
 
                 <div className="GamePage">
-                    {/*  Joueur 1 */}
-                    {ShowPlayer1()}
-                    {/*  Joueur 2 */}
-                    {ShowPlayer2()}
-                    {/*  Joueur 3 */}
-                    {ShowPlayer3()}
-                    {/*  Joueur 4 */}
-                    {ShowPlayer4()}
+                    {ShowPlayer()}
+                    {ShowOtherPlayer()}
                     {/*  Pile */}
                     <div className='Discard'>
                         {ShowDiscardCards()}
