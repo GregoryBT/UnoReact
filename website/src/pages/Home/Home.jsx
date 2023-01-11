@@ -1,8 +1,23 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useReducer, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import ApiVerifLogin from "../../api/User/VerifLogin"
 import Loader from "../../component/Loader/Loader";
 import './Home.scss'
+import MyContext from '../../utils/context/socket.jsx';
+import socketReducer from '../../utils/reducer/socket.jsx'
+
+// const initialTodos = [
+//     {
+//         id: 1,
+//         title: "Todo 1",
+//         complete: false,
+//     },
+//     {
+//         id: 2,
+//         title: "Todo 2",
+//         complete: false,
+//     },
+// ];
 
 function Home() {
     //#region ************************************************ Déclaration des variables
@@ -12,8 +27,11 @@ function Home() {
     const navigate = useNavigate();
     // Nom
     const [name, setName] = useState("")
-    //#endregion
 
+    // Socket
+    // const [todos, dispatch] = useReducer(socketReducer, useContext(MyContext));
+    // const [socket, dispatch] = useReducer(socketReducer, useContext(MyContext));
+    //#endregion
     //#region ************************************************ Vérification de la connexion
     useEffect(() => {
         checkLogin()
@@ -35,11 +53,13 @@ function Home() {
 
     //#region ************************************************ Evenement
     const onClickCreateGameHandler = () => {
-        alert("Create Game")
+        // let todo = { id: 1 }
+        // dispatch({ type: "ADD", id: todo.id });        
+        navigate('/lobby');
     }
 
     const onClickJoinGameHandler = () => {
-        alert("JoinGame")
+        console.log(todos)
     }
     //#endregion
 

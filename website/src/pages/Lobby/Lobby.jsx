@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import ApiVerifLogin from "../../api/User/VerifLogin"
 import Loader from "../../component/Loader/Loader";
+import MyContext from '../../utils/context/socket.jsx';
 import './Lobby.scss'
 
 function Lobby() {
@@ -14,6 +15,21 @@ function Lobby() {
     const [name, setName] = useState("")
     const [gameOwner, setGameOwner] = useState([{ name: "GToccanier", role: "Owner" }])
     const [allPlayers, setAllPlayers] = useState([{ name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" },])
+    // Socket
+    const [socket, setSocket] = useState(useContext(MyContext));
+    //#endregion
+
+    //#region ************************************************ useEffect
+    useEffect(() => {
+        CreateGame();
+        JoinGame();
+    }, [])
+    // #endregion
+
+    //#region ************************************************ Socket
+    socket.on('players', players => {
+        setAllPlayers(players)
+    });
     //#endregion
 
     //#region ************************************************ Vérification de la connexion
@@ -35,11 +51,24 @@ function Lobby() {
     }
     //#endregion
 
-
     //#region ************************************************ Evenement
+    // Se déclanche lorsque l'on clique sur le bouton "Commencer la partie"
+    const StartGame = () => {
+        navigate('/game');
+    }
     //#endregion
 
     //#region ************************************************ Fonction
+    // Création d'un partie de uno
+    function CreateGame() {
+
+    }
+    // Rejoindre la game
+    function JoinGame() {
+
+        socket.emit('add player', "Test");
+    }
+    // Affichage des joueurs
     function AfficherPlayers(_players) {
         return (_players.map((_player) => (
             <p className='Player'>{_player.name}</p>
@@ -60,7 +89,7 @@ function Lobby() {
                         <div className='Players'>
                             {AfficherPlayers(allPlayers)}
                         </div>
-                        <button>Commencer la partie</button>
+                        <button onClick={() => StartGame()}>Commencer la partie</button>
                     </div>
                 </div>
             )

@@ -199,7 +199,6 @@ socketIO.on('connection', socket => {
         players.forEach(player => {
             player.card = []
         });
-
         // Reremplir le deck de base
         deck = [
             { color: 'red', value: '0' },
@@ -379,12 +378,8 @@ socketIO.on('connection', socket => {
         // On met a jour l'état des joueurs
         MiseAJourStatePlayers();
     });
-
-
     // ****************************************************** Evenement ****************************************************** //
     socket.emit('GetPlayers', players);
-
-
 });
 
 http.listen(5000, () => {

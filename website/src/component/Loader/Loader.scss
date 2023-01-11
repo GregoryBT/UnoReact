@@ -26,6 +26,76 @@
         border-radius: 100%;
         //Animation
         animation: Rotate 2s linear infinite;
+    }
 
+    .Text {
+        font-size: 35px;
+        color: #FFFFFF;
+
+        @keyframes AfficherPoint1 {
+            0% {
+                opacity: 0;
+            }
+
+            19% {
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes AfficherPoint2 {
+            0% {
+                opacity: 0;
+            }
+
+            39% {
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes AfficherPoint3 {
+            0% {
+                opacity: 0;
+            }
+
+            59% {
+                opacity: 0;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .Point1 {
+            animation: AfficherPoint1 2s linear infinite;
+        }
+
+        .Point2 {
+            animation: AfficherPoint2 2s linear infinite;
+        }
+
+        .Point3 {
+            animation: AfficherPoint3 2s linear infinite;
+        }
     }
 }

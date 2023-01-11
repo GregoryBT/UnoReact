@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import ApiVerifLogin from "../../api/User/VerifLogin"
 import './Game.scss'
 import DefaultProfil from '../../assets/profil.jpg'
 import Card from '../../component/Card/Card'
+import MyContext from '../../utils/context/socket.jsx';
 import Loader from "../../component/Loader/Loader";
 
 function Game() {
@@ -76,7 +77,6 @@ function Game() {
             }
         ]
     )
-
     const [discardCards, setDiscardCards] = useState(
         [
             { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
@@ -91,7 +91,10 @@ function Game() {
             { id: "10", color: "blue", value: "3", hexa: "#178ccd" }
         ]
     )
+    // Socket
+    const [socket, setSocket] = useState(useContext(MyContext));
     //#endregion
+
     //#region ************************************************ Vérification de la connexion
     useEffect(() => {
         checkLogin()
@@ -111,10 +114,8 @@ function Game() {
     }
     //#endregion
 
-
     //#region ************************************************ Evenement
     //#endregion
-
 
     //#region ************************************************ Fonction
     function ShowEnnemiCards(_cards) {
