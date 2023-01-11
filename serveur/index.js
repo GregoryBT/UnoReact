@@ -146,27 +146,35 @@ function shuffleDeck(deck) {
 // *********************************************** Mettre a jour les données chez les clients *********************************************** //
 // Met a jour l'état des joueurs
 function MiseAJourStatePlayers() {
+    console.log(players)
     players.forEach(player => {
         _socket = playerssocket.filter(p => p.id === player.id);
         console.log("Players envoyer à " + _socket[0].id)
         _socket[0].emit('players', players);
     });
 }
-// Met a jour les cartes des joueurs
-function MiseAJourPlayerHand(_player) {
-    _player.forEach(player => {
-        _socket = playerssocket.filter(p => p.id === player.id);
-        console.log("Cartes envoyer à " + _socket[0].id)
-        _socket[0].emit('cards', player.card);
-    });
-}
 // Met a jour l'état de la discardPile
 function MiseAJourStatedDiscardPile() {
+    console.log(players)
     players.forEach(player => {
         _socket = playerssocket.filter(p => p.id === player.id);
         console.log("discardPile envoyer à " + _socket[0].id)
         _socket[0].emit('discardPile', discardPile);
     });
+}
+// Dit a tous le monde de lancer la partie
+function MiseAJourStartGame() {
+    console.log(players)
+    if (players !== undefined) {
+        players.forEach(player => {
+            _socket = playerssocket.filter(p => p.id === player.id);
+            console.log("StartGame envoyer à " + _socket[0].id)
+            _socket[0].emit('startGame');
+        });
+    }
+    else {
+        console.log("Players not found")
+    }
 }
 
 socketIO.on('connection', socket => {
@@ -178,11 +186,12 @@ socketIO.on('connection', socket => {
         // On supprime les joueurs qui ont le même id
         players = players.filter(p => p.id !== socket.id);
         // On crée le nouveau joueur
-        _newplayer = { 'id': socket.id, 'name': name, 'card': [] }
+        _newplayer = { 'id': socket.id, 'name': name, 'cards': [] }
         // On ajoute le nouveau joueur au tableau de joueurs
         players.push(_newplayer);
         // On renvoie le nouveau joueur
         socket.emit('player', _newplayer);
+        console.log(players)
         // On met a jour l'état des joueurs
         MiseAJourStatePlayers();
     });
@@ -197,7 +206,7 @@ socketIO.on('connection', socket => {
     socket.on('restart game', () => {
         // Vider les cartes des joueurs
         players.forEach(player => {
-            player.card = []
+            player.cards = []
         });
         // Reremplir le deck de base
         deck = [
@@ -323,12 +332,12 @@ socketIO.on('connection', socket => {
         console.log(_players)
         for (let i = 0; i < numbercard; i++) {
             _players.forEach(player => {
-                player.card.push(deck.pop())
+                player.cards.push(deck.pop())
             });
         }
         // On met a jour l'état des joueurs
         players = _players
-        MiseAJourPlayerHand(_players);
+        MiseAJourStatePlayers();
     });
     // ***************************************************************** Ajoute des carte dans le pot
     socket.on('add discardPile', (_player, card) => {
@@ -341,14 +350,14 @@ socketIO.on('connection', socket => {
             console.log(players)
             _player = players.filter(p => p.id === _player.id);
             // On retire la carte de la main du gars
-            for (let i = 0; i < _player[0].card.length; i++) {
-                if (_player[0].card[i].color === card.color && _player[0].card[i].value === card.value) {
+            for (let i = 0; i < _player[0].cards.length; i++) {
+                if (_player[0].cards[i].color === card.color && _player[0].cards[i].value === card.value) {
                     index = i;
                     break;
                 }
             }
             if (index > -1) {
-                _player[0].card.splice(index, 1);
+                _player[0].cards.splice(index, 1);
             }
             // On met a jour l'état de la main du joueur
             MiseAJourPlayerHand(_player);
@@ -363,11 +372,17 @@ socketIO.on('connection', socket => {
         console.log(players)
         _players = players.filter(p => p.id === _players.id);
         console.log(_players)
-        _players[0].card.push(deck.pop())
+        _players[0].cards.push(deck.pop())
         // On met a jour l'état des joueurs
         MiseAJourPlayerHand(_players);
     });
-
+    // ***************************************************************** Lancement de la partie
+    socket.on('start game', () => {
+        // console.log(deck)
+        // console.log(players)
+        // On met a jour l'état des joueurs
+        MiseAJourStartGame();
+    });
     // ***************************************************************** Gère la déconnexion des joueurs
     socket.on('disconnect', () => {
         console.log(`Le joueur avec l'ID de socket ${socket.id} s'est déconnecté.`);
@@ -378,8 +393,10 @@ socketIO.on('connection', socket => {
         // On met a jour l'état des joueurs
         MiseAJourStatePlayers();
     });
-    // ****************************************************** Evenement ****************************************************** //
-    socket.emit('GetPlayers', players);
+    // ***************************************************************** Envoie les joueurs
+    socket.on('getPlayers', () => {
+        socket.emit('players', players);
+    });
 });
 
 http.listen(5000, () => {

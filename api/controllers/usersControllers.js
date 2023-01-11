@@ -66,7 +66,7 @@ exports.login = (req, res) => {
             })
             if (user) {
                 // Generate an access token
-                const accessToken = jwt.sign({ email: user.username }, accessTokenSecret)
+                const accessToken = jwt.sign({ username: user.username }, accessTokenSecret)
 
                 res.status(200).json({
                     accessToken,
@@ -90,6 +90,7 @@ exports.veriflogin = (req, res) => {
                 return res.status(403).json("Forbidden")
             }
             req.user = user;
+            console.log(user)
             res.send(JSON.stringify(req.user))
         })
     } else {

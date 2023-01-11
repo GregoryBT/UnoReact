@@ -16,83 +16,95 @@ function Game() {
     // Nom
     const [players, setPlayers] = useState(
         [
-            {
-                username: "Gregory",
-                status: "Owner",
-                cards: [
-                    { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
-                    { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
-                    { id: "3", color: "blue", value: "8", hexa: "#178ccd" },
-                    { id: "4", color: "Black", value: "Plus4", hexa: "#363636" },
-                    { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-                    { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
-                    { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-                    { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "10", color: "yellow", value: "3", hexa: "#ffdd02" }
-                ]
-            },
-            {
-                username: "Lucas",
-                status: "Guest",
-                cards: [
-                    { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
-                    { id: "2", color: "yellow", value: "3", hexa: "#ffdd02" },
-                    { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
-                    { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
-                    { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-                    { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
-                    { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-                    { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "10", color: "Black", value: "Plus4", hexa: "#363636" },
-                    { id: "11", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "12", color: "yellow", value: "3", hexa: "#ffdd02" },
-                    { id: "13", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "14", color: "Black", value: "Plus4", hexa: "#363636" },
-                    { id: "15", color: "blue", value: "3", hexa: "#178ccd" },
-                    { id: "16", color: "yellow", value: "3", hexa: "#ffdd02" },
-                    { id: "17", color: "blue", value: "3", hexa: "#178ccd" }
-                ]
-            },
-            {
-                username: "Ryad",
-                status: "Guest",
-                cards: [
-                    { id: "1", color: "red", value: "Reverse", hexa: "#cb1f45" },
-                    { id: "2", color: "red", value: "3", hexa: "#cb1f45" },
-                    { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
-                    { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
-                    { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
-                    { id: "5", color: "red", value: "8", hexa: "#cb1f45" }
-                ]
-            },
-            {
-                username: "Jarod",
-                status: "Guest",
-                cards: [
-                    { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
-                    { id: "2", color: "Black", value: "Plus4", hexa: "#363636" }
-                ]
-            }
+            // {
+            //     username: "Gregory",
+            //     status: "Owner",
+            //     cards: [
+            //         { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
+            //         { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
+            //         { id: "3", color: "blue", value: "8", hexa: "#178ccd" },
+            //         { id: "4", color: "Black", value: "Plus4", hexa: "#363636" },
+            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
+            //         { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
+            //         { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
+            //         { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "10", color: "yellow", value: "3", hexa: "#ffdd02" }
+            //     ]
+            // },
+            // {
+            //     username: "Lucas",
+            //     status: "Guest",
+            //     cards: [
+            //         { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
+            //         { id: "2", color: "yellow", value: "3", hexa: "#ffdd02" },
+            //         { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
+            //         { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
+            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
+            //         { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
+            //         { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
+            //         { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "10", color: "Black", value: "Plus4", hexa: "#363636" },
+            //         { id: "11", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "12", color: "yellow", value: "3", hexa: "#ffdd02" },
+            //         { id: "13", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "14", color: "Black", value: "Plus4", hexa: "#363636" },
+            //         { id: "15", color: "blue", value: "3", hexa: "#178ccd" },
+            //         { id: "16", color: "yellow", value: "3", hexa: "#ffdd02" },
+            //         { id: "17", color: "blue", value: "3", hexa: "#178ccd" }
+            //     ]
+            // },
+            // {
+            //     username: "Ryad",
+            //     status: "Guest",
+            //     cards: [
+            //         { id: "1", color: "red", value: "Reverse", hexa: "#cb1f45" },
+            //         { id: "2", color: "red", value: "3", hexa: "#cb1f45" },
+            //         { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
+            //         { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
+            //         { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
+            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" }
+            //     ]
+            // },
+            // {
+            //     username: "Jarod",
+            //     status: "Guest",
+            //     cards: [
+            //         { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
+            //         { id: "2", color: "Black", value: "Plus4", hexa: "#363636" }
+            //     ]
+            // }
         ]
     )
     const [discardCards, setDiscardCards] = useState(
         [
-            { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
-            { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
-            { id: "3", color: "yellow", value: "8", hexa: "#ffdd02" },
-            { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
-            { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-            { id: "2", color: "Black", value: "Plus4", hexa: "#363636" },
-            { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-            { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-            { id: "9", color: "red", value: "3", hexa: "#178ccd" },
-            { id: "10", color: "blue", value: "3", hexa: "#178ccd" }
+            // { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
+            // { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
+            // { id: "3", color: "yellow", value: "8", hexa: "#ffdd02" },
+            // { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
+            // { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
+            // { id: "2", color: "Black", value: "Plus4", hexa: "#363636" },
+            // { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
+            // { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
+            // { id: "9", color: "red", value: "3", hexa: "#178ccd" },
+            // { id: "10", color: "blue", value: "3", hexa: "#178ccd" }
         ]
     )
     // Socket
     const [socket, setSocket] = useState(useContext(MyContext));
+    //#endregion
+
+    useEffect(() => {
+        socket.emit('getPlayers');
+    }, [])
+    //#region ************************************************ Socket
+    socket.on('players', players => {
+        setPlayers(players)
+    });
+    socket.on('discardPile', cards => {
+        setDiscardCards(cards)
+    });
     //#endregion
 
     //#region ************************************************ Vérification de la connexion
@@ -102,7 +114,6 @@ function Game() {
 
     async function checkLogin() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
-        console.log(user)
         if (user === "Forbidden") {
             alert("Il faut d'abord se connecter")
             navigate('/login');
@@ -160,6 +171,80 @@ function Game() {
             <button className='BTN_Uno'>UNO</button>
         )
     }
+
+    // Affiche le joueurs numéro 1
+    function ShowPlayer1() {
+        console.log(players[0])
+        if (!!players[0]) {
+            return (
+                <div className='player1'>
+                    {players[0].cards.map((card) => (
+                        <Card
+                            key={card.id}
+                            className='card'
+                            style={{ backgroundColor: card.hexa }}
+                            side={"Front"}
+                            card={card}
+                        />
+                    ))}
+                </div>
+            )
+        }
+    }
+    // Affiche le joueurs numéro 2
+    function ShowPlayer2() {
+        if (!!players[1]) {
+            return (
+                <div className='player2'>
+                    <div className='player'>
+                        <div className='avatar'>
+                            <img src={DefaultProfil}></img>
+                        </div>
+                        <p className='username'>{players[1].username}</p>
+                    </div>
+                    <div className='playercard'>
+                        {ShowEnnemiCards(players[1].cards)}
+                    </div>
+                </div>
+            )
+        }
+    }
+    // Affiche le joueurs numéro 3
+    function ShowPlayer3() {
+        if (!!players[2]) {
+            return (
+                <div className='player3'>
+                    <div className='player'>
+                        <div className='avatar'>
+                            <img src={DefaultProfil}></img>
+                        </div>
+                        <p className='username'>{players[2].username}</p>
+                    </div>
+                    <div className='playercard'>
+                        {ShowEnnemiCards(players[2].cards)}
+                    </div>
+                </div>
+            )
+        }
+    }
+    // Affiche le joueurs numéro 4
+    function ShowPlayer4() {
+        if (!!players[3]) {
+            return (
+                <div className='player4'>
+                    <div className='player'>
+                        <div className='avatar'>
+                            <img src={DefaultProfil}></img>
+                        </div>
+                        <p className='username'>{players[3].username}</p>
+                    </div>
+                    <div className='playercard'>
+                        {ShowEnnemiCards(players[3].cards)}
+                    </div>
+                </div>
+            )
+        }
+    }
     //#endregion
 
     //#region ************************************************ Return
@@ -171,53 +256,13 @@ function Game() {
 
                 <div className="GamePage">
                     {/*  Joueur 1 */}
-                    <div className='player1'>
-                        {players[0].cards.map((card) => (
-                            <Card
-                                key={card.id}
-                                className='card'
-                                style={{ backgroundColor: card.hexa }}
-                                side={"Front"}
-                                card={card}
-                            />
-                        ))}
-                    </div>
+                    {ShowPlayer1()}
+                    {/*  Joueur 2 */}
+                    {ShowPlayer2()}
+                    {/*  Joueur 3 */}
+                    {ShowPlayer3()}
                     {/*  Joueur 4 */}
-                    <div className='player2'>
-                        <div className='player'>
-                            <div className='avatar'>
-                                <img src={DefaultProfil}></img>
-                            </div>
-                            <p className='username'>{players[1].username}</p>
-                        </div>
-                        <div className='playercard'>
-                            {ShowEnnemiCards(players[1].cards)}
-                        </div>
-                    </div>
-                    {/*  Joueur 4 */}
-                    <div className='player3'>
-                        <div className='player'>
-                            <div className='avatar'>
-                                <img src={DefaultProfil}></img>
-                            </div>
-                            <p className='username'>{players[2].username}</p>
-                        </div>
-                        <div className='playercard'>
-                            {ShowEnnemiCards(players[2].cards)}
-                        </div>
-                    </div>
-                    {/*  Joueur 4 */}
-                    <div className='player4'>
-                        <div className='player'>
-                            <div className='avatar'>
-                                <img src={DefaultProfil}></img>
-                            </div>
-                            <p className='username'>{players[3].username}</p>
-                        </div>
-                        <div className='playercard'>
-                            {ShowEnnemiCards(players[3].cards)}
-                        </div>
-                    </div>
+                    {ShowPlayer4()}
                     {/*  Pile */}
                     <div className='Discard'>
                         {ShowDiscardCards()}

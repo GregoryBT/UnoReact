@@ -13,22 +13,25 @@ function Lobby() {
     const navigate = useNavigate();
     // Nom
     const [name, setName] = useState("")
-    const [gameOwner, setGameOwner] = useState([{ name: "GToccanier", role: "Owner" }])
-    const [allPlayers, setAllPlayers] = useState([{ name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" }, { name: "GToccanier2", role: "Player" },])
+    const [players, setPlayers] = useState([])
     // Socket
     const [socket, setSocket] = useState(useContext(MyContext));
     //#endregion
 
     //#region ************************************************ useEffect
     useEffect(() => {
-        CreateGame();
-        JoinGame();
-    }, [])
+        if (user !== null) {
+            JoinGame(user.username);
+        }
+    }, [user])
     // #endregion
 
     //#region ************************************************ Socket
     socket.on('players', players => {
-        setAllPlayers(players)
+        setPlayers(players)
+    });
+    socket.on('startGame', () => {
+        navigate('/game');
     });
     //#endregion
 
@@ -54,25 +57,45 @@ function Lobby() {
     //#region ************************************************ Evenement
     // Se déclanche lorsque l'on clique sur le bouton "Commencer la partie"
     const StartGame = () => {
-        navigate('/game');
+        if (players.length >= 2) {
+            socket.emit('shuffle deck');
+            socket.emit('distribute card', players, 7);
+            socket.emit('start game');
+        }
+        else {
+            alert("Il faut au moins 2 joueurs pour commencer la partie")
+        }
     }
     //#endregion
 
     //#region ************************************************ Fonction
-    // Création d'un partie de uno
-    function CreateGame() {
-
-    }
     // Rejoindre la game
-    function JoinGame() {
-
-        socket.emit('add player', "Test");
+    function JoinGame(_username) {
+        socket.emit('add player', _username);
     }
     // Affichage des joueurs
-    function AfficherPlayers(_players) {
-        return (_players.map((_player) => (
-            <p className='Player'>{_player.name}</p>
-        )))
+    function ShowPlayers(_players) {
+        return (_players.map((_player, i) => {
+            // On affiche une étoile pour le chef de la partie
+            if (i === 0) {
+                return (
+                    <p className='Player'>{_player.name} ⭐</p>
+                )
+            }
+            else {
+                return (
+                    <p className='Player'>{_player.name}</p>
+                )
+            }
+        }))
+    }
+    // Affichage du bouton
+    function ShowBTNStartGame() {
+        // On vérifie qu'il y a bien des joueurs dans la partie
+        if (players.length > 0) {
+            // On affiche le bouton seulement au premier qui a créer la partie
+            if (user.username === players[0].name) { return <button onClick={() => StartGame()}>Commencer la partie</button> }
+        }
     }
     //#endregion
 
@@ -87,9 +110,10 @@ function Lobby() {
                     <div className="content">
                         <h1>Joueurs Connectés</h1>
                         <div className='Players'>
-                            {AfficherPlayers(allPlayers)}
+                            {ShowPlayers(players)}
                         </div>
-                        <button onClick={() => StartGame()}>Commencer la partie</button>
+                        {ShowBTNStartGame()}
+
                     </div>
                 </div>
             )
