@@ -1,15 +1,31 @@
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { sha256 } from 'js-sha256';
 import './Login.scss'
 import ApiAddUser from '../../api/User/Post'
+import ApiLogin from '../../api/User/Login';
 
 function Register() {
     const { register, formState: { errors }, handleSubmit, watch } = useForm({ criteriaMode: 'all', mode: 'onChange', })
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         const _response = await ApiAddUser(data.username, sha256(data.password))
-
+        if (_response === "User already created") {
+            alert("Le pseudonyme est déja utilisé")
+        }
+        else {
+            console.log(_response)
+            const token = await ApiLogin(_response.username, _response.password)
+            if (token === "Not match") {
+                alert("Identifiant ou mot de passe incorrect.")
+            }
+            else {
+                localStorage.setItem("Token", token.accessToken)
+                navigate('/home');
+            }
+        }
 
     }
 

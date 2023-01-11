@@ -8,6 +8,7 @@ import Lobby from '../../pages/Lobby/Lobby';
 import Game from '../../pages/Game/Game';
 import Test from '../../pages/Test/Test';
 import Register from '../../pages/Login/Register';
+import SecuredRoute from '../SecuredRoute';
 
 function App() {
   return (
@@ -16,9 +17,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/lobby" element={<Lobby />} />
-        <Route path="/game" element={<Game />} />
+        <SecuredRoute path="/home" element={<Home />} />
+        <SecuredRoute path="/lobby" element={<Lobby />} />
+        <SecuredRoute path="/game" element={<Game />} />
         <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>

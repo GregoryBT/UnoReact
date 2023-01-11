@@ -26,23 +26,30 @@ exports.post = (req, res) => {
         const user = docs.find((u) => {
             return u.username === UsernameItem
         })
+        console.log("Test")
         console.log(user)
-    })
-    // On créé l'objet qui stock les données du nouvel utlilisateur
-    const newUsers = new Users({
-        username: UsernameItem,
-        password: PasswordItem
-    })
+        // Si il n'y a pas d'utilisateur déja crée avec ce pseudonyme
+        if (user === undefined) {
+            // On créé l'objet qui stock les données du nouvel utlilisateur
+            const newUsers = new Users({
+                username: UsernameItem,
+                password: PasswordItem
+            })
 
-    // On envoie l'utilisateur dans la base de données
-    newUsers.save((err, docs) => {
-        if (!err) {
-            res.status(201).send(docs)
-        } else {
-            console.log('err', err)
-            res.status(500).send(err)
+            // On envoie l'utilisateur dans la base de données
+            newUsers.save((err, docs) => {
+                if (!err) {
+                    res.status(201).json(docs)
+                } else {
+                    res.status(500).json(err)
+                }
+            })
+        }
+        else {
+            res.status(200).json("User already created")
         }
     })
+
 }
 
 exports.login = (req, res) => {
