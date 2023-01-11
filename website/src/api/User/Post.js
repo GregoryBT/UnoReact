@@ -6,7 +6,6 @@ async function ApiAddUser(Username, Password) {
         username: Username,
         password: Password
     }
-    console.log(InformationNouvelUtilisateur)
     // Verification de la de la personne via l'api avec l'objet créé précedement en paramètre
     return await fetch(`http://localhost:7777/users`, {
         method: 'POST',

@@ -29,6 +29,7 @@ function Home() {
     const [name, setName] = useState("")
 
     // Socket
+    const [socket, setSocket] = useState(useContext(MyContext));
     // const [todos, dispatch] = useReducer(socketReducer, useContext(MyContext));
     // const [socket, dispatch] = useReducer(socketReducer, useContext(MyContext));
     //#endregion
@@ -39,7 +40,6 @@ function Home() {
 
     async function checkLogin() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
-        console.log(user)
         if (user === "Forbidden") {
             alert("Il faut d'abord se connecter")
             navigate('/login');
@@ -53,13 +53,13 @@ function Home() {
 
     //#region ************************************************ Evenement
     const onClickCreateGameHandler = () => {
-        // let todo = { id: 1 }
-        // dispatch({ type: "ADD", id: todo.id });        
+
+        socket.emit('restart game');
         navigate('/lobby');
     }
 
     const onClickJoinGameHandler = () => {
-        console.log(todos)
+        // console.log(todos)
     }
     //#endregion
 

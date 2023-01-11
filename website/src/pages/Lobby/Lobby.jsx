@@ -42,7 +42,6 @@ function Lobby() {
 
     async function checkLogin() {
         const user = await ApiVerifLogin(localStorage.getItem("Token"))
-        console.log(user)
         if (user === "Forbidden") {
             alert("Il faut d'abord se connecter")
             navigate('/login');

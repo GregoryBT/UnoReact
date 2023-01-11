@@ -16,7 +16,6 @@ function Register() {
             alert("Le pseudonyme est déja utilisé")
         }
         else {
-            console.log(_response)
             const token = await ApiLogin(_response.username, _response.password)
             if (token === "Not match") {
                 alert("Identifiant ou mot de passe incorrect.")

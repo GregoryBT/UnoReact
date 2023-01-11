@@ -33,9 +33,7 @@ function Todos() {
     const [todos, dispatch] = useReducer(reducer, initialTodos);
 
     const handleComplete = (todo) => {
-        console.log(todo)
         dispatch({ type: "COMPLETE", id: todo.id });
-        console.log(todos)
     };
 
     return (

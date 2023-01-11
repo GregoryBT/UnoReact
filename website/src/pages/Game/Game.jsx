@@ -97,6 +97,7 @@ function Game() {
 
     useEffect(() => {
         socket.emit('getPlayers');
+        socket.emit('getDiscardPile');
     }, [])
     //#region ************************************************ Socket
     socket.on('players', players => {
@@ -126,6 +127,15 @@ function Game() {
     //#endregion
 
     //#region ************************************************ Evenement
+    // Se déclacneh lorque l'utilisateur clique sur la carte
+    function HandleClickCard(card) {
+        console.log(players.filter(p => p.name === user.username))
+        socket.emit('add discardPile', players.filter(p => p.name === user.username), card);
+    }
+    // Se déclanche lorsque l'utilisateur clique sur la pioche
+    function HandleClickDraw() {
+        socket.emit('draw', players.filter(p => p.name === user.username));
+    }
     //#endregion
 
     //#region ************************************************ Fonction
@@ -171,13 +181,9 @@ function Game() {
             <button className='BTN_Uno'>UNO</button>
         )
     }
-
     // Affiche notre joueur
     function ShowPlayer() {
         let player = players.filter(p => p.name === user.username);
-        console.log(player)
-        console.log(players)
-        console.log(user.username)
         return (
             <div className='player1'>
                 {player[0].cards.map((card) => (
@@ -187,6 +193,7 @@ function Game() {
                         style={{ backgroundColor: card.hexa }}
                         side={"Front"}
                         card={card}
+                        onClick={() => HandleClickCard(card)}
                     />
                 ))}
             </div>
@@ -196,7 +203,6 @@ function Game() {
     function ShowOtherPlayer() {
         let otherplayer = players.filter(p => p.name !== user.username);
         return otherplayer.map((_player, i) => {
-            console.log(_player)
             return (
                 <div className={'player' + (i + 2)}>
                     <div className='player'>
@@ -234,7 +240,7 @@ function Game() {
                     <div className='drawCard'>
                         UNO
                     </div>
-                    <div className='firstdrawCard drawCard'>
+                    <div className='firstdrawCard drawCard' onClick={() => HandleClickDraw()}>
                         UNO
                     </div>
                     {/*  Bouton UNO */}

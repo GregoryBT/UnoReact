@@ -147,29 +147,23 @@ function shuffleDeck(deck) {
 // *********************************************** Mettre a jour les données chez les clients *********************************************** //
 // Met a jour l'état des joueurs
 function MiseAJourStatePlayers() {
-    console.log(players)
     players.forEach(player => {
         _socket = playerssocket.filter(p => p.id === player.id);
-        console.log("Players envoyer à " + _socket[0].id)
         _socket[0].emit('players', players);
     });
 }
 // Met a jour l'état de la discardPile
 function MiseAJourStatedDiscardPile() {
-    console.log(players)
     players.forEach(player => {
         _socket = playerssocket.filter(p => p.id === player.id);
-        console.log("discardPile envoyer à " + _socket[0].id)
         _socket[0].emit('discardPile', discardPile);
     });
 }
 // Dit a tous le monde de lancer la partie
 function MiseAJourStartGame() {
-    console.log(players)
     if (players !== undefined) {
         players.forEach(player => {
             _socket = playerssocket.filter(p => p.id === player.id);
-            console.log("StartGame envoyer à " + _socket[0].id)
             _socket[0].emit('startGame');
         });
     }
@@ -192,7 +186,6 @@ socketIO.on('connection', socket => {
         players.push(_newplayer);
         // On renvoie le nouveau joueur
         socket.emit('player', _newplayer);
-        console.log(players)
         // On met a jour l'état des joueurs
         MiseAJourStatePlayers();
     });
@@ -211,6 +204,7 @@ socketIO.on('connection', socket => {
         });
         // Reremplir le deck de base
         deck = [
+            // { color: 'red', value: '0', hexa: '#ba2736', rotate: Math.floor(Math.random() * 360), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { color: 'red', value: '0', hexa: '#ba2736' },
             { color: 'red', value: '1', hexa: '#ba2736' },
             { color: 'red', value: '1', hexa: '#ba2736' },
@@ -329,8 +323,6 @@ socketIO.on('connection', socket => {
     });
     // ***************************************************************** Distribuer les cartes
     socket.on('distribute card', (_players, numbercard) => {
-        console.log("Nombre de cartes a distribué : " + numbercard)
-        console.log(_players)
         for (let i = 0; i < numbercard; i++) {
             _players.forEach(player => {
                 player.cards.push(deck.pop())
@@ -342,45 +334,43 @@ socketIO.on('connection', socket => {
     });
     // ***************************************************************** Ajoute des carte dans le pot
     socket.on('add discardPile', (_player, card) => {
-        // 
-        if (card === "default") {
-            card = deck.pop()
-        }
-        else {
-            // Récupere les information du joueur
-            console.log(players)
-            _player = players.filter(p => p.id === _player.id);
-            // On retire la carte de la main du gars
-            for (let i = 0; i < _player[0].cards.length; i++) {
-                if (_player[0].cards[i].color === card.color && _player[0].cards[i].value === card.value) {
-                    index = i;
-                    break;
-                }
+        // On retire la carte de la main du gars
+        for (let i = 0; i < _player[0].cards.length; i++) {
+            if (_player[0].cards[i].color === card.color && _player[0].cards[i].value === card.value) {
+                index = i;
+                break;
             }
-            if (index > -1) {
-                _player[0].cards.splice(index, 1);
-            }
-            // On met a jour l'état de la main du joueur
-            MiseAJourPlayerHand(_player);
         }
+        if (index > -1) {
+            _player[0].cards.splice(index, 1);
+        }
+        let _players = players.filter(p => p.id !== _player[0].id);
+        _players.push(_player[0])
+
+        players = _players
+        // On met a jour l'état de la main du joueur
+        MiseAJourStatePlayers();
+
         // Rajoute la pile au milieu
         discardPile.push(card)
         // On met a jour l'état de la pile
+        _players = players.filter(p => p.id === _player.id);
         MiseAJourStatedDiscardPile();
     });
     // ***************************************************************** Piocher une carte
-    socket.on('draw', _players => {
-        console.log(players)
-        _players = players.filter(p => p.id === _players.id);
-        console.log(_players)
-        _players[0].cards.push(deck.pop())
-        // On met a jour l'état des joueurs
-        MiseAJourPlayerHand(_players);
+    socket.on('draw', _player => {
+        _player[0].cards.push(deck.pop())
+
+        let _players = players.filter(p => p.id !== _player[0].id);
+        _players.push(_player[0])
+
+        players = _players
+        // On met a jour l'état de la main du joueur
+        MiseAJourStatePlayers();
     });
     // ***************************************************************** Lancement de la partie
     socket.on('start game', () => {
-        // console.log(deck)
-        // console.log(players)
+        discardPile.push(deck.pop())
         // On met a jour l'état des joueurs
         MiseAJourStartGame();
     });
@@ -397,6 +387,10 @@ socketIO.on('connection', socket => {
     // ***************************************************************** Envoie les joueurs
     socket.on('getPlayers', () => {
         socket.emit('players', players);
+    });
+    // ***************************************************************** Envoie la discardPile
+    socket.on('getDiscardPile', () => {
+        socket.emit('discardPile', discardPile);
     });
 });
 
