@@ -51,7 +51,7 @@ exports.post = (req, res) => {
     })
 
 }
-
+// Créer un token de connexion
 exports.login = (req, res) => {
     console.log(req.body)
     // On récupere les données passer en JSON
@@ -78,4 +78,23 @@ exports.login = (req, res) => {
             res.status(500).send(err)
         }
     })
+}
+// Vérifie que le client existe
+exports.veriflogin = (req, res) => {
+    const authHeader = req.headers.authorization
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1]
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.status(403).json("Forbidden")
+            }
+            req.user = user;
+            res.send(JSON.stringify(req.user))
+        })
+    } else {
+        res.status(401).json("Erreur 2")
+    }
+
+
 }

@@ -6,9 +6,13 @@ import ApiLogin from '../../api/User/Login';
 import './Login.scss'
 
 function Login() {
-    const { register, formState: { errors }, handleSubmit, watch } = useForm({ criteriaMode: 'all', mode: 'onChange', })
-    const navigate = useNavigate();
 
+    //#region ************************************************ Déclaration des variables
+    const { register, formState: { errors }, handleSubmit } = useForm({ criteriaMode: 'all', mode: 'onChange', })
+    const navigate = useNavigate();
+    //#endregion
+
+    //#region ************************************************ Evenement
     const onSubmit = async (data) => {
         const token = await ApiLogin(data.username, sha256(data.password))
         if (token === "Not match") {
@@ -19,7 +23,9 @@ function Login() {
             navigate('/home');
         }
     }
+    //#endregion
 
+    //#region ************************************************ Return
     return (
         <div className='LoginPage'>
             <div className='content'>
@@ -58,6 +64,7 @@ function Login() {
             </div>
         </div>
     )
+    //#endregion
 }
 
 export default Login

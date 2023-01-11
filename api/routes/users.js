@@ -9,6 +9,7 @@ router.get('/', usersControllers.get)
 // POST
 router.post('/', usersControllers.post)
 router.post('/login', usersControllers.login)
+router.post('/veriflogin', usersControllers.veriflogin)
 
 
 module.exports = router

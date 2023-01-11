@@ -4,6 +4,12 @@ import DefaultProfil from '../../assets/profil.jpg'
 import Card from '../../component/Card/Card'
 
 function Game() {
+    //#region ************************************************ Déclaration des variables
+    // Connexion
+    const [user, setUser] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const navigate = useNavigate();
+    // Nom
     const [players, setPlayers] = useState(
         [
             {
@@ -82,7 +88,31 @@ function Game() {
             { id: "10", color: "blue", value: "3", hexa: "#178ccd" }
         ]
     )
+    //#endregion
+    //#region ************************************************ Vérification de la connexion
+    useEffect(() => {
+        checkLogin()
+    }, [])
 
+    async function checkLogin() {
+        const user = await ApiVerifLogin(localStorage.getItem("Token"))
+        console.log(user)
+        if (user === "Forbidden") {
+            navigate('/login');
+        }
+        else {
+            setUser(user)
+            setIsLoaded(true)
+        }
+    }
+    //#endregion
+
+
+    //#region ************************************************ Evenement
+    //#endregion
+
+
+    //#region ************************************************ Fonction
     function ShowEnnemiCards(_cards) {
         if (_cards.length > 14) { }
         return (_cards.map((card, i) => {
@@ -125,7 +155,9 @@ function Game() {
             <button className='BTN_Uno'>UNO</button>
         )
     }
+    //#endregion
 
+    //#region ************************************************ Return
     return (
         <div className="GamePage">
             {/*  Joueur 1 */}
@@ -192,6 +224,7 @@ function Game() {
 
         </div>
     )
+    //#endregion
 }
 
 export default Game

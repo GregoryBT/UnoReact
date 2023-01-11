@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Login from '../../pages/Login/Login';
@@ -8,7 +9,10 @@ import Lobby from '../../pages/Lobby/Lobby';
 import Game from '../../pages/Game/Game';
 import Test from '../../pages/Test/Test';
 import Register from '../../pages/Login/Register';
-import SecuredRoute from '../SecuredRoute';
+import { Navigate } from 'react-router-dom';
+import ApiVerifLogin from '../../api/User/VerifLogin';
+
+
 
 function App() {
   return (
@@ -17,9 +21,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <SecuredRoute path="/home" element={<Home />} />
-        <SecuredRoute path="/lobby" element={<Lobby />} />
-        <SecuredRoute path="/game" element={<Game />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/lobby" element={<Lobby />} />
+        <Route path="/game" element={<Game />} />
         <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
