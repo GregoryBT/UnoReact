@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState, useReducer } from "react"
 import { useNavigate } from 'react-router-dom';
 import ApiVerifLogin from "../../api/User/VerifLogin"
 import './Game.scss'
@@ -6,6 +6,7 @@ import DefaultProfil from '../../assets/profil.jpg'
 import Card from '../../component/Card/Card'
 import MyContext from '../../utils/context/socket.jsx';
 import Loader from "../../component/Loader/Loader";
+import ModalPlus4 from "../../component/ModalPlus4/ModalPlus4";
 
 function Game() {
     //#region ************************************************ Déclaration des variables
@@ -13,84 +14,12 @@ function Game() {
     const [user, setUser] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const navigate = useNavigate();
-    // Nom
-    const [players, setPlayers] = useState(
-        [
-            // {
-            //     username: "Gregory",
-            //     status: "Owner",
-            //     cards: [
-            //         { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
-            //         { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
-            //         { id: "3", color: "blue", value: "8", hexa: "#178ccd" },
-            //         { id: "4", color: "Black", value: "Plus4", hexa: "#363636" },
-            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-            //         { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
-            //         { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-            //         { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "10", color: "yellow", value: "3", hexa: "#ffdd02" }
-            //     ]
-            // },
-            // {
-            //     username: "Lucas",
-            //     status: "Guest",
-            //     cards: [
-            //         { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
-            //         { id: "2", color: "yellow", value: "3", hexa: "#ffdd02" },
-            //         { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
-            //         { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
-            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-            //         { id: "6", color: "Black", value: "Plus4", hexa: "#363636" },
-            //         { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-            //         { id: "9", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "10", color: "Black", value: "Plus4", hexa: "#363636" },
-            //         { id: "11", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "12", color: "yellow", value: "3", hexa: "#ffdd02" },
-            //         { id: "13", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "14", color: "Black", value: "Plus4", hexa: "#363636" },
-            //         { id: "15", color: "blue", value: "3", hexa: "#178ccd" },
-            //         { id: "16", color: "yellow", value: "3", hexa: "#ffdd02" },
-            //         { id: "17", color: "blue", value: "3", hexa: "#178ccd" }
-            //     ]
-            // },
-            // {
-            //     username: "Ryad",
-            //     status: "Guest",
-            //     cards: [
-            //         { id: "1", color: "red", value: "Reverse", hexa: "#cb1f45" },
-            //         { id: "2", color: "red", value: "3", hexa: "#cb1f45" },
-            //         { id: "3", color: "yellow", value: "4", hexa: "#ffdd02" },
-            //         { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
-            //         { id: "4", color: "blue", value: "Plus2", hexa: "#178ccd" },
-            //         { id: "5", color: "red", value: "8", hexa: "#cb1f45" }
-            //     ]
-            // },
-            // {
-            //     username: "Jarod",
-            //     status: "Guest",
-            //     cards: [
-            //         { id: "1", color: "yellow", value: "Reverse", hexa: "#ffdd02" },
-            //         { id: "2", color: "Black", value: "Plus4", hexa: "#363636" }
-            //     ]
-            // }
-        ]
-    )
-    const [discardCards, setDiscardCards] = useState(
-        [
-            // { id: "1", color: "blue", value: "Skip", hexa: "#178ccd" },
-            // { id: "2", color: "red", value: "8", hexa: "#cb1f45" },
-            // { id: "3", color: "yellow", value: "8", hexa: "#ffdd02" },
-            // { id: "4", color: "blue", value: "8", hexa: "#178ccd" },
-            // { id: "5", color: "red", value: "8", hexa: "#cb1f45" },
-            // { id: "2", color: "Black", value: "Plus4", hexa: "#363636" },
-            // { id: "7", color: "blue", value: "3", hexa: "#178ccd" },
-            // { id: "8", color: "yellow", value: "3", hexa: "#ffdd02" },
-            // { id: "9", color: "red", value: "3", hexa: "#178ccd" },
-            // { id: "10", color: "blue", value: "3", hexa: "#178ccd" }
-        ]
-    )
+    // Cards
+    const [discardCards, setDiscardCards] = useState([])
+    // Modal
+    const [open, setOpen] = useState(false)
+    const [modalCard, setModalCard] = useState("")
+    const [color, setColor] = useState("")
     // Socket
     const [socket, setSocket] = useState(useContext(MyContext));
     //#endregion
@@ -99,11 +28,23 @@ function Game() {
         socket.emit('getPlayers');
         socket.emit('getDiscardPile');
     }, [])
+    //#region ************************************************ Reducer
+    const playersReducer = (state, action) => {
+        switch (action.type) {
+            case "SET_Players":
+                return action.payload
+            default:
+                return state
+        }
+    }
+    const [players, playersDispatch] = useReducer(playersReducer, [])
+    //#endregion
     //#region ************************************************ Socket
     socket.on('players', players => {
-        setPlayers(players)
+        playersDispatch({ type: "SET_Players", payload: players })
     });
     socket.on('discardPile', cards => {
+        console.log(cards.length)
         setDiscardCards(cards)
     });
     //#endregion
@@ -125,12 +66,30 @@ function Game() {
         }
     }
     //#endregion
-
+    //#region 
+    function handleModalClose() {
+        setOpen(false)
+    }
+    //#endregion
     //#region ************************************************ Evenement
     // Se déclacneh lorque l'utilisateur clique sur la carte
     function HandleClickCard(card) {
-        console.log(players.filter(p => p.name === user.username))
-        socket.emit('add discardPile', players.filter(p => p.name === user.username), card);
+        const lastCard = discardCards[discardCards.length - 1]
+        if (card.value === '+4' || card.value === 'Joker') {
+            setModalCard(card)
+            setOpen(true)
+        }
+        else if (card.value === lastCard.value || card.color === lastCard.color || card.color === "black" || lastCard.option === card.color) {
+            socket.emit('add discardPile', players.filter(p => p.name === user.username), card);
+            // EndTurn(card)
+        }
+    }
+    function HandleCardPlus4(color) {
+        handleModalClose()
+        console.log(color)
+        modalCard.option = color
+        socket.emit('add discardPile', players.filter(p => p.name === user.username), modalCard);
+        // EndTurn(card)
     }
     // Se déclanche lorsque l'utilisateur clique sur la pioche
     function HandleClickDraw() {
@@ -164,12 +123,11 @@ function Game() {
     }
 
     function ShowDiscardCards() {
-        console.log(discardCards);
         return (discardCards.map((card) => (
             <Card
                 key={card.id}
                 className='discardCard'
-                style={{ backgroundColor: card.hexa, transform: 'rotate(' + card.rotate + 'deg)', marginLeft: (-25 - card.mLeft) + 'px', marginTop: (-55 - card.mTop) + 'px' }}
+                style={{ backgroundColor: card.hexa, transform: 'rotate(' + (90 - card.rotate) + 'deg)', marginLeft: (-25 - card.mLeft) + 'px', marginTop: (-55 - card.mTop) + 'px' }}
                 side={"Front"}
                 card={card}
             />
@@ -221,6 +179,10 @@ function Game() {
 
 
     }
+
+    function EndTurn(card) {
+        socket.emit('end turn', players.filter(p => p.name === user.username), card);
+    }
     //#endregion
 
     //#region ************************************************ Return
@@ -246,7 +208,11 @@ function Game() {
                     </div>
                     {/*  Bouton UNO */}
                     {ShowBTNUno()}
-
+                    <ModalPlus4
+                        open={open}
+                        handleColor={(_color) => HandleCardPlus4(_color)}
+                        handleModalClose={() => handleModalClose()}
+                    />
                 </div>
             )
             }

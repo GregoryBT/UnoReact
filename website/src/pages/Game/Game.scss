@@ -89,6 +89,7 @@
 
     .card {
         margin: 0px -25px;
+        font-size: 40px;
         height: 150px;
         width: 100px;
         border-radius: 15px;
@@ -114,6 +115,7 @@
 
     .discardCard {
         position: absolute;
+        font-size: 40px;
         height: 150px;
         width: 100px;
         border-radius: 15px;
@@ -124,16 +126,6 @@
         flex-direction: column;
         justify-content: center;
         filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.25));
-
-        // &::after {
-        //     content: "";
-        //     border: 5px solid white;
-        //     width: 80%;
-        //     height: 80%;
-        //     border-radius: 100%;
-        //     position: absolute;
-        //     transform: rotate(45deg);
-        // }
     }
 
     .drawCard {
@@ -162,11 +154,6 @@
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
     }
-
-    .cards-bottom {}
-
-
-
 
     .player {
         .avatar {

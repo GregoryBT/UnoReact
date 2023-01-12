@@ -1,0 +1,35 @@
+.Modal {
+    display: none;
+
+    &.Show {
+        position: absolute;
+        z-index: 1000;
+        padding: 20px;
+        background-color: #c4c4c4;
+
+        border-radius: 30px;
+        // Centrer le contenu
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .content {
+            display: flex;
+
+            .BTN_Color {
+                height: 80px;
+                width: 80px;
+                border-radius: 100%;
+                border: 0px solid;
+                margin: 10px;
+            }
+
+            .BTN_Color:hover {
+                cursor: pointer;
+                border: 10px solid white;
+            }
+        }
+    }
+
+}
