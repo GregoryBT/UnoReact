@@ -317,29 +317,30 @@ socketIO.on('connection', socket => {
     });
     // ***************************************************************** Gere le tour
     socket.on('end turn', (player, card) => {
-        // Changement de l'ordre des joueurs
-        let _playerADeplacer = turn.ordre.shift()
-        turn.ordre.push(_playerADeplacer)
+        let _playerADeplacer;
+        switch (card.value) {
+            case '◁◁':
+                turn.ordre.reverse();
+                break;
+            case '🚫':
+                for (let i = 0; i < 2; i++) {
+                    // Changement de l'ordre des joueurs
+                    _playerADeplacer = turn.ordre.shift()
+                    turn.ordre.push(_playerADeplacer)
+                }
+                break;
+            default:
+                // Changement de l'ordre des joueurs
+                _playerADeplacer = turn.ordre.shift()
+                turn.ordre.push(_playerADeplacer)
+                break;
+        }
 
         // Changement du joueur
         turn.player = turn.ordre[0]
 
         // Mise a jour des données
         MiseAJourTurn();
-        // switch (card.value) {
-        //     case '◁◁':
-        //         // On met a jour l'état des joueurs
-        //         MiseAJourTurn(3);
-        //         break;
-        //     case '🚫':
-        //         // On met a jour l'état des joueurs
-        //         MiseAJourTurn(2);
-        //         break;
-        //     default:
-        //         // On met a jour l'état des joueurs
-        // MiseAJourTurn(1);
-        //         break;
-        // }
     });
     // ***************************************************************** Gère la déconnexion des joueurs
     socket.on('disconnect', () => {

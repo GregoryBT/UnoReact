@@ -68,11 +68,10 @@ function Home() {
             {!isLoaded ? (
                 <Loader></Loader>
             ) : (
-
                 <div className="HomePage">
                     <div className="content">
-                        <button onClick={() => onClickCreateGameHandler()}> Créer une partie</button>
-                        <button onClick={() => onClickJoinGameHandler()}> Rejoindre une partie</button>
+                        <button onClick={() => onClickCreateGameHandler()}> JoinGame</button>
+                        {/* <button onClick={() => onClickJoinGameHandler()}> Rejoindre une partie</button> */}
                     </div>
                 </div>
             )
