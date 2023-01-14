@@ -15,6 +15,7 @@ import Loader from '../Loader/Loader';
 import MyContext from '../../utils/context/socket.jsx';
 
 import io from 'socket.io-client';
+import Test from '../../pages/Test/Test';
 const socket = io.connect('http://localhost:5000');
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/game" element={<Game />} />
-          <Route path="/test" element={<Test3 />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/loader" element={<Loader />} />
         </Routes>
       </BrowserRouter>
