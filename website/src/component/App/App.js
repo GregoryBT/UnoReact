@@ -7,7 +7,6 @@ import Home from '../../pages/Home/Home';
 import './App.css';
 import Lobby from '../../pages/Lobby/Lobby';
 import Game from '../../pages/Game/Game';
-import Test3 from '../../pages/Test/Test3';
 import Register from '../../pages/Login/Register';
 import { Navigate } from 'react-router-dom';
 import ApiVerifLogin from '../../api/User/VerifLogin';
@@ -15,7 +14,7 @@ import Loader from '../Loader/Loader';
 import MyContext from '../../utils/context/socket.jsx';
 
 import io from 'socket.io-client';
-import Test from '../../pages/Test/Test';
+import Win from '../../pages/Win/Win';
 const socket = io.connect('http://localhost:5000');
 
 function App() {
@@ -29,8 +28,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/game" element={<Game />} />
-          <Route path="/test" element={<Test />} />
           <Route path="/loader" element={<Loader />} />
+          <Route path="/win/:id" element={<Win />} />
         </Routes>
       </BrowserRouter>
     </MyContext.Provider>

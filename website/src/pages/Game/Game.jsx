@@ -20,10 +20,8 @@ function Game() {
     const [turn, setTurn] = useState({})
     // Modal
     const [open, setOpen] = useState(false)
-    const [open2, setOpen2] = useState(false)
     const [modalCard, setModalCard] = useState("")
     const [color, setColor] = useState("")
-    const [winner, setWinner] = useState([])
     // Socket
     const [socket, setSocket] = useState(useContext(MyContext));
     //#endregion
@@ -55,9 +53,9 @@ function Game() {
         setTurn(_turn)
     });
     socket.on('win', _player => {
-        setOpen2(true)
-        console.log(_player)
-        // setWinner(_player)
+        // let id = _player[0].id
+        console.log(_player[0].id)
+        navigate('/win/' + _player[0].id);
     });
     //#endregion
 
@@ -81,9 +79,6 @@ function Game() {
     //#region 
     function handleModalClose() {
         setOpen(false)
-    }
-    function handleModalWinClose() {
-        setOpen2(false)
     }
     //#endregion
     //#region ************************************************ Evenement
@@ -207,7 +202,6 @@ function Game() {
 
 
     }
-
     function EndTurn(card) {
         socket.emit('end turn', players.filter(p => p.name === user.username), card);
     }
@@ -240,11 +234,6 @@ function Game() {
                         open={open}
                         handleColor={(_color) => HandleCardPlus4(_color)}
                         handleModalClose={() => handleModalClose()}
-                    />
-                    <ModalWin
-                        open={open2}
-                        player={winner}
-                    // handleModalWinClose={() => handleModalWinClose()}
                     />
                 </div>
             )

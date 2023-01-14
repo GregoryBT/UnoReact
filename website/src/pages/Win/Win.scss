@@ -1,0 +1,23 @@
+.Winner {
+    font-size: 50px;
+}
+
+.MenuButton {
+    font-size: large;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 30%;
+    padding: 10px;
+
+    background-color: #ec2127;
+    border: 0px solid;
+    border-radius: 20px;
+
+}
+
+.MenuButton:hover {
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #680306;
+}

@@ -58,7 +58,7 @@ function Lobby() {
     const StartGame = () => {
         if (players.length >= 2) {
             socket.emit('shuffle deck');
-            socket.emit('distribute card', players, 7);
+            socket.emit('distribute card', players, 2);
             socket.emit('start game');
         }
         else {
