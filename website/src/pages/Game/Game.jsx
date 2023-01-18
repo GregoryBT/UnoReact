@@ -102,12 +102,14 @@ function Game() {
         modalCard.option = color
         socket.emit('add discardPile', players.filter(p => p.name === user.username), modalCard);
         EndTurn(modalCard)
+        setModalCard("")
     }
     // Se déclanche lorsque l'utilisateur clique sur la pioche
     function HandleClickDraw() {
         if (turn.player.name === user.username) {
             socket.emit('draw', players.filter(p => p.name === user.username));
-            EndTurn(modalCard)
+            EndTurn({ id: null, color: null, value: null, hexa: null, rotate: null, mLeft: null, mTop: null })
+            setModalCard("")
         }
     }
     //#endregion
@@ -203,6 +205,7 @@ function Game() {
 
     }
     function EndTurn(card) {
+        console.log(card)
         socket.emit('end turn', players.filter(p => p.name === user.username), card);
     }
     //#endregion

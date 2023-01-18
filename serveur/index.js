@@ -56,7 +56,6 @@ function MiseAJourStatedDiscardPile() {
 // Met a jour l'état de win
 function MiseAJourStateWin(_player) {
     players.forEach(player => {
-        console.log("Boucle")
         _socket = playerssocket.filter(p => p.id === player.id);
         _socket[0].emit('win', _player);
     });
@@ -85,7 +84,6 @@ function MiseAJourTurn() {
 // met la premiere carte
 function ShowFirstCard() {
     let card = deck.shift()
-    console.log(card)
     if (card.color === 'black' || card.value === '+2' || card.value === '◁◁' || card.value === '🚫' || card.value === '+2') {
         deck.push(card)
         ShowFirstCard()
@@ -131,17 +129,17 @@ socketIO.on('connection', socket => {
         }
         // Reremplir le deck de base
         deck = [
-            // { id: '0', color: 'red', value: '0', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '1', color: 'red', value: '1', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '2', color: 'red', value: '1', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '3', color: 'red', value: '2', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '4', color: 'red', value: '2', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '5', color: 'red', value: '3', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '6', color: 'red', value: '3', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '7', color: 'red', value: '4', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '8', color: 'red', value: '4', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '9', color: 'red', value: '5', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '10', color: 'red', value: '5', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '0', color: 'red', value: '0', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '1', color: 'red', value: '1', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '2', color: 'red', value: '1', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '3', color: 'red', value: '2', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '4', color: 'red', value: '2', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '5', color: 'red', value: '3', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '6', color: 'red', value: '3', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '7', color: 'red', value: '4', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '8', color: 'red', value: '4', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '9', color: 'red', value: '5', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '10', color: 'red', value: '5', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '11', color: 'red', value: '6', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '12', color: 'red', value: '6', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '13', color: 'red', value: '7', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
@@ -156,81 +154,81 @@ socketIO.on('connection', socket => {
             { id: '22', color: 'red', value: '◁◁', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '23', color: 'red', value: '🚫', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '24', color: 'red', value: '🚫', hexa: '#ba2736', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '25', color: 'green', value: '0', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '26', color: 'green', value: '1', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '27', color: 'green', value: '1', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '28', color: 'green', value: '2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '29', color: 'green', value: '2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '30', color: 'green', value: '3', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '31', color: 'green', value: '3', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '32', color: 'green', value: '4', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '33', color: 'green', value: '4', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '34', color: 'green', value: '5', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '35', color: 'green', value: '5', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '36', color: 'green', value: '6', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '37', color: 'green', value: '6', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '38', color: 'green', value: '7', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '39', color: 'green', value: '7', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '40', color: 'green', value: '8', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '41', color: 'green', value: '8', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '42', color: 'green', value: '9', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '43', color: 'green', value: '9', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '44', color: 'green', value: '+2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '45', color: 'green', value: '+2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '46', color: 'green', value: '◁◁', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '47', color: 'green', value: '◁◁', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '48', color: 'green', value: '🚫', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '49', color: 'green', value: '🚫', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '50', color: 'blue', value: '0', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '51', color: 'blue', value: '1', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '52', color: 'blue', value: '1', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '53', color: 'blue', value: '2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '54', color: 'blue', value: '2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '55', color: 'blue', value: '3', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '56', color: 'blue', value: '3', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '57', color: 'blue', value: '4', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '58', color: 'blue', value: '4', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '59', color: 'blue', value: '5', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '60', color: 'blue', value: '5', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '61', color: 'blue', value: '6', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '62', color: 'blue', value: '6', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '63', color: 'blue', value: '7', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '64', color: 'blue', value: '7', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '65', color: 'blue', value: '8', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '66', color: 'blue', value: '8', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '67', color: 'blue', value: '9', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '68', color: 'blue', value: '9', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '69', color: 'blue', value: '+2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '70', color: 'blue', value: '+2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '71', color: 'blue', value: '◁◁', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '72', color: 'blue', value: '◁◁', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '73', color: 'blue', value: '🚫', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '74', color: 'blue', value: '🚫', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '75', color: 'yellow', value: '0', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '76', color: 'yellow', value: '1', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '77', color: 'yellow', value: '1', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '78', color: 'yellow', value: '2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '79', color: 'yellow', value: '2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '80', color: 'yellow', value: '3', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '81', color: 'yellow', value: '3', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '82', color: 'yellow', value: '4', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '83', color: 'yellow', value: '4', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '84', color: 'yellow', value: '5', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '85', color: 'yellow', value: '5', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '86', color: 'yellow', value: '6', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '87', color: 'yellow', value: '6', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '88', color: 'yellow', value: '7', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '89', color: 'yellow', value: '7', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '90', color: 'yellow', value: '8', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '91', color: 'yellow', value: '8', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '92', color: 'yellow', value: '9', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '93', color: 'yellow', value: '9', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '94', color: 'yellow', value: '+2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '95', color: 'yellow', value: '+2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '96', color: 'yellow', value: '◁◁', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '97', color: 'yellow', value: '◁◁', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '98', color: 'yellow', value: '🚫', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
-            // { id: '99', color: 'yellow', value: '🚫', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '25', color: 'green', value: '0', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '26', color: 'green', value: '1', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '27', color: 'green', value: '1', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '28', color: 'green', value: '2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '29', color: 'green', value: '2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '30', color: 'green', value: '3', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '31', color: 'green', value: '3', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '32', color: 'green', value: '4', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '33', color: 'green', value: '4', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '34', color: 'green', value: '5', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '35', color: 'green', value: '5', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '36', color: 'green', value: '6', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '37', color: 'green', value: '6', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '38', color: 'green', value: '7', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '39', color: 'green', value: '7', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '40', color: 'green', value: '8', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '41', color: 'green', value: '8', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '42', color: 'green', value: '9', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '43', color: 'green', value: '9', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '44', color: 'green', value: '+2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '45', color: 'green', value: '+2', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '46', color: 'green', value: '◁◁', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '47', color: 'green', value: '◁◁', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '48', color: 'green', value: '🚫', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '49', color: 'green', value: '🚫', hexa: '#54a335', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '50', color: 'blue', value: '0', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '51', color: 'blue', value: '1', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '52', color: 'blue', value: '1', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '53', color: 'blue', value: '2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '54', color: 'blue', value: '2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '55', color: 'blue', value: '3', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '56', color: 'blue', value: '3', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '57', color: 'blue', value: '4', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '58', color: 'blue', value: '4', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '59', color: 'blue', value: '5', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '60', color: 'blue', value: '5', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '61', color: 'blue', value: '6', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '62', color: 'blue', value: '6', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '63', color: 'blue', value: '7', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '64', color: 'blue', value: '7', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '65', color: 'blue', value: '8', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '66', color: 'blue', value: '8', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '67', color: 'blue', value: '9', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '68', color: 'blue', value: '9', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '69', color: 'blue', value: '+2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '70', color: 'blue', value: '+2', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '71', color: 'blue', value: '◁◁', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '72', color: 'blue', value: '◁◁', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '73', color: 'blue', value: '🚫', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '74', color: 'blue', value: '🚫', hexa: '#0154a4', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '75', color: 'yellow', value: '0', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '76', color: 'yellow', value: '1', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '77', color: 'yellow', value: '1', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '78', color: 'yellow', value: '2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '79', color: 'yellow', value: '2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '80', color: 'yellow', value: '3', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '81', color: 'yellow', value: '3', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '82', color: 'yellow', value: '4', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '83', color: 'yellow', value: '4', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '84', color: 'yellow', value: '5', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '85', color: 'yellow', value: '5', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '86', color: 'yellow', value: '6', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '87', color: 'yellow', value: '6', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '88', color: 'yellow', value: '7', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '89', color: 'yellow', value: '7', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '90', color: 'yellow', value: '8', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '91', color: 'yellow', value: '8', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '92', color: 'yellow', value: '9', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '93', color: 'yellow', value: '9', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '94', color: 'yellow', value: '+2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '95', color: 'yellow', value: '+2', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '96', color: 'yellow', value: '◁◁', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '97', color: 'yellow', value: '◁◁', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '98', color: 'yellow', value: '🚫', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
+            { id: '99', color: 'yellow', value: '🚫', hexa: '#ebcf25', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '100', color: 'black', value: '+4', hexa: '#090909', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '101', color: 'black', value: '+4', hexa: '#090909', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
             { id: '102', color: 'black', value: '+4', hexa: '#090909', rotate: Math.floor(Math.random() * 180), mLeft: Math.floor(Math.random() * (45)), mTop: Math.floor(Math.random() * (40)) },
@@ -282,7 +280,6 @@ socketIO.on('connection', socket => {
         // On met a jour l'état de la pile
         _players = players.filter(p => p.id === _player.id);
         MiseAJourStatedDiscardPile();
-        console.log("Coucou")
         if (_player[0].cards.length <= 0) {
             MiseAJourStateWin(_player);
         }
@@ -329,6 +326,7 @@ socketIO.on('connection', socket => {
     });
     // ***************************************************************** Gere le tour
     socket.on('end turn', (player, card) => {
+        console.log(card)
         let _playerADeplacer;
         switch (card.value) {
             case '◁◁':
@@ -340,6 +338,42 @@ socketIO.on('connection', socket => {
                     _playerADeplacer = turn.ordre.shift()
                     turn.ordre.push(_playerADeplacer)
                 }
+                break;
+            case '+2':
+                let playerPlus2 = players.filter(p => p.id === turn.ordre[1].id);
+                for (let i = 0; i < 2; i++) {
+                    playerPlus2[0].cards.push(deck.pop())
+                }
+                // On rajoute le nouveau gars du tableau
+                players = players.filter(p => p.id !== playerPlus2[0].id);
+                players.push(playerPlus2[0])
+                // On met a jour l'état de la main du joueur
+                // MiseAJourStatePlayers();
+                players.forEach(player => {
+                    _socket = playerssocket.filter(p => p.id === player.id);
+                    _socket[0].emit('players', players);
+                });
+                // Changement de l'ordre des joueurs
+                _playerADeplacer = turn.ordre.shift()
+                turn.ordre.push(_playerADeplacer)
+                break;
+            case '+4':
+                let playerPlus4 = players.filter(p => p.id === turn.ordre[1].id);
+                for (let i = 0; i < 4; i++) {
+                    playerPlus4[0].cards.push(deck.pop())
+                }
+                // On rajoute le nouveau gars du tableau
+                players = players.filter(p => p.id !== playerPlus4[0].id);
+                players.push(playerPlus4[0])
+                // On met a jour l'état de la main du joueur
+                // MiseAJourStatePlayers();
+                players.forEach(player => {
+                    _socket = playerssocket.filter(p => p.id === player.id);
+                    _socket[0].emit('players', players);
+                });
+                // Changement de l'ordre des joueurs
+                _playerADeplacer = turn.ordre.shift()
+                turn.ordre.push(_playerADeplacer)
                 break;
             default:
                 // Changement de l'ordre des joueurs
