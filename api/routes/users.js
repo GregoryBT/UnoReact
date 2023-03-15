@@ -6,6 +6,7 @@ const usersControllers = require('../controllers/usersControllers.js')
 
 // GET
 router.get('/', usersControllers.get)
+//
 // POST
 router.post('/', usersControllers.post)
 router.post('/login', usersControllers.login)

@@ -11,6 +11,7 @@ const UsersRoutes = require('./routes/users')
 require('./config/database')
 
 app.use(cors())
+//sdqs
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
